@@ -79,7 +79,7 @@ public class Main : IPlugin, ISettingProvider {
 
     private Func<ActionContext, bool> GetOpenResultAction(string query, EMode mode) {
         return _ => {
-            var url = $"https://you.com/search?tbm=youchat&q={HttpUtility.UrlEncode(query)}&mode={mode.ToString().ToLower()}";
+            var url = $"https://you.com/search?tbm=youchat&q={HttpUtility.UrlEncode(query)}&chatMode={mode.ToString().ToLower()}";
             _context.API.OpenUrl(url);
             return true;
         };
