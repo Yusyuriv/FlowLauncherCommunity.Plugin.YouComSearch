@@ -6,18 +6,47 @@
              mc:Ignorable="d"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="150" d:DesignWidth="500">
-    <Grid Margin="70 9 18 9">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="150" />
-        </Grid.ColumnDefinitions>
+    <StackPanel Margin="70 9 18 9">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="Default mode of search:" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="0" Text="Default mode of search:" VerticalAlignment="Center" />
 
-        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding Modes}"
-                  SelectedItem="{Binding Path=Mode}" HorizontalAlignment="Stretch" DisplayMemberPath="Title">
+            <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding Modes}"
+                      SelectedItem="{Binding Path=Mode}" HorizontalAlignment="Stretch" DisplayMemberPath="Title">
 
-        </ComboBox>
+            </ComboBox>
+        </Grid>
+        <Grid Margin="0 12 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-    </Grid>
+            <StackPanel Grid.Column="0" Margin="0 0 4 0">
+                <TextBlock Text="Smart mode shortcut"/>
+                <TextBox Margin="0 4 0 0" Text="{Binding KeywordDefault}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="4 0">
+                <TextBlock Text="Genius mode shortcut"/>
+                <TextBox Margin="0 4 0 0" Text="{Binding KeywordAgent}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Margin="4 0">
+                <TextBlock Text="Research mode shortcut"/>
+                <TextBox Margin="0 4 0 0" Text="{Binding KeywordResearch}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Margin="4 0 0 0">
+                <TextBlock Text="Create mode shortcut"/>
+                <TextBox Margin="0 4 0 0" Text="{Binding KeywordCreate}" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
 </UserControl>

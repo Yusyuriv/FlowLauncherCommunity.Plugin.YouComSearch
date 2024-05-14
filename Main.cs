@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Web;
 using System.Windows.Controls;
 using Flow.Launcher.Plugin;
@@ -28,52 +27,46 @@ public class Main : IPlugin, ISettingProvider {
             };
         }
 
+        var results = new List<Result>();
         var mode = _settings.Mode;
 
-        return new List<Result> {
-            new() {
-                Title = "Search on You.com",
-                SubTitle = $"Default mode specified in settings ({mode.ToFriendlyTitle()})",
-                CopyText = query.Search,
-                IcoPath = IcoPath,
-                Action = GetOpenResultAction(query.Search, mode),
-                Score = 100,
-            },
-            new() {
-                Title = $"Search on You.com in {EMode.Default.ToFriendlyTitle()} mode",
-                CopyText = query.Search,
-                IcoPath = IcoPath,
-                Action = GetOpenResultAction(query.Search, EMode.Default),
-                Score = 50,
-            },
-            new() {
-                Title = $"Search on You.com in {EMode.Agent.ToFriendlyTitle()} mode",
-                CopyText = query.Search,
-                IcoPath = IcoPath,
-                Action = GetOpenResultAction(query.Search, EMode.Agent),
-                Score = 40,
-            },
-            new() {
-                Title = $"Search on You.com in {EMode.Research.ToFriendlyTitle()} mode",
-                CopyText = query.Search,
-                IcoPath = IcoPath,
-                Action = GetOpenResultAction(query.Search, EMode.Research),
-                Score = 30,
-            },
-            new() {
-                Title = $"Search on You.com in {EMode.Create.ToFriendlyTitle()} mode",
-                CopyText = query.Search,
-                IcoPath = IcoPath,
-                Action = GetOpenResultAction(query.Search, EMode.Create),
-                Score = 20,
-            },
-            new() {
-                Title = $"Search on You.com in {EMode.Custom.ToFriendlyTitle()} mode",
-                CopyText = query.Search,
-                IcoPath = IcoPath,
-                Action = GetOpenResultAction(query.Search, EMode.Custom),
-                Score = 10,
-            },
+        var addAll = string.IsNullOrEmpty(query.ActionKeyword) || _context.CurrentPluginMetadata.ActionKeyword is "*" || query.ActionKeyword == _context.CurrentPluginMetadata.ActionKeyword;
+        if (addAll) {
+            results.Add(GetResult(
+                query.Search,
+                mode,
+                100,
+                "Search on You.com",
+                $"Default mode specified in settings ({mode.ToFriendlyTitle()})"
+            ));
+        }
+        if (addAll || query.ActionKeyword == _settings.KeywordDefault) {
+            results.Add(GetResult(query.Search, EMode.Default, 50));
+        }
+        if (addAll || query.ActionKeyword == _settings.KeywordAgent) {
+            results.Add(GetResult(query.Search, EMode.Agent, 40));
+        }
+        if (addAll || query.ActionKeyword == _settings.KeywordResearch) {
+            results.Add(GetResult(query.Search, EMode.Research, 30));
+        }
+        if (addAll || query.ActionKeyword == _settings.KeywordCreate) {
+            results.Add(GetResult(query.Search, EMode.Create, 20));
+        }
+        if (addAll) {
+            results.Add(GetResult(query.Search, EMode.Custom, 10));
+        }
+
+        return results;
+    }
+
+    private Result GetResult(string search, EMode mode, int score, string? title = null, string? subtitle = null) {
+        return new Result {
+            Title = title ?? $"Search on You.com in {mode.ToFriendlyTitle()} mode",
+            SubTitle = subtitle ?? string.Empty,
+            CopyText = search,
+            IcoPath = IcoPath,
+            Action = GetOpenResultAction(search, mode),
+            Score = score,
         };
     }
 
@@ -86,6 +79,6 @@ public class Main : IPlugin, ISettingProvider {
     }
 
     public Control CreateSettingPanel() {
-        return new SettingsPanel(_settings);
+        return new SettingsPanel(_settings, _context);
     }
 }
