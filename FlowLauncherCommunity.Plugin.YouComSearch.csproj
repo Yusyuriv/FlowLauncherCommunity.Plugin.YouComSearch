@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <ProjectGuid>{EC563DA4-0435-4EB9-AA79-08043320A18F}</ProjectGuid>
+        <AssemblyName>FlowLauncherCommunity.Plugin.Youcomsearch</AssemblyName>
+        <PackageId>FlowLauncherCommunity.Plugin.YouComSearch</PackageId>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <UseWpf>true</UseWpf>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DebugSymbols>false</DebugSymbols>
+        <DebugType>None</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include=".github/workflows/*" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <Content Include="plugin.json" CopyToOutputDirectory="Always" />
+        <Content Include="icon.png" CopyToOutputDirectory="PreserveNewest" />
+        <Content Include="LICENSE" CopyToOutputDirectory="PreserveNewest" />
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Flow.Launcher.Plugin" Version="4.2.0"/>
+        <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" PrivateAssets="All" />
+    </ItemGroup>
+
+</Project>

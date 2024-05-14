@@ -1,0 +1,12 @@
+{
+  "ID": "EC563DA4-0435-4EB9-AA79-08043320A18F",
+  "Version": "1.0.0",
+  "IcoPath": "icon.png",
+  "ActionKeyword": "you",
+  "Name": "You.com Search",
+  "Description": "A plugin for conveniently starting chat sessions on You.com",
+  "Author": "yusyuriv",
+  "Language": "csharp",
+  "Website": "https://github.com/yusyuriv/FlowLauncherCommunity.Plugin.Youcomsearch",
+  "ExecuteFileName": "FlowLauncherCommunity.Plugin.YouComSearch.dll"
+}
