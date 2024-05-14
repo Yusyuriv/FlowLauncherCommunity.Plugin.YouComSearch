@@ -31,39 +31,45 @@ public class Main : IPlugin, ISettingProvider {
         var mode = _settings.Mode;
 
         return new List<Result> {
-            new NonEqualResult {
+            new() {
                 Title = "Search on You.com",
                 SubTitle = $"Default mode specified in settings ({mode.ToFriendlyTitle()})",
+                CopyText = query.Search,
                 IcoPath = IcoPath,
                 Action = GetOpenResultAction(query.Search, mode),
                 Score = 100,
             },
-            new NonEqualResult {
+            new() {
                 Title = $"Search on You.com in {EMode.Default.ToFriendlyTitle()} mode",
+                CopyText = query.Search,
                 IcoPath = IcoPath,
                 Action = GetOpenResultAction(query.Search, EMode.Default),
                 Score = 50,
             },
-            new NonEqualResult {
+            new() {
                 Title = $"Search on You.com in {EMode.Agent.ToFriendlyTitle()} mode",
+                CopyText = query.Search,
                 IcoPath = IcoPath,
                 Action = GetOpenResultAction(query.Search, EMode.Agent),
                 Score = 40,
             },
-            new NonEqualResult {
+            new() {
                 Title = $"Search on You.com in {EMode.Research.ToFriendlyTitle()} mode",
+                CopyText = query.Search,
                 IcoPath = IcoPath,
                 Action = GetOpenResultAction(query.Search, EMode.Research),
                 Score = 30,
             },
-            new NonEqualResult {
+            new() {
                 Title = $"Search on You.com in {EMode.Create.ToFriendlyTitle()} mode",
+                CopyText = query.Search,
                 IcoPath = IcoPath,
                 Action = GetOpenResultAction(query.Search, EMode.Create),
                 Score = 20,
             },
-            new NonEqualResult {
+            new() {
                 Title = $"Search on You.com in {EMode.Custom.ToFriendlyTitle()} mode",
+                CopyText = query.Search,
                 IcoPath = IcoPath,
                 Action = GetOpenResultAction(query.Search, EMode.Custom),
                 Score = 10,
